@@ -9,7 +9,7 @@ def taxCalculation(totalSalary, regime, totalExemption):
     else:
         regimeSlabs = newRegimeIncomeTaxSlabs
         totalExemption = 0
-    taxableIncome = totalSalary - totalExemption -standard_ded
+    taxableIncome = totalSalary - totalExemption
     tax = 0
     index = 0
     taxableIncomeAux = taxableIncome
@@ -33,19 +33,16 @@ x = 0
 income_exempt = {}
 while income_temp < income_max:
     exemption_temp = 0
-    newTax = taxCalculation(income_temp, 'new', 0)
+    newTax = taxCalculation(income_temp, 'new', standard_ded)
     while exemption_temp < exemption_max and exemption_temp < income_temp:
         exemption_temp += 5000
-        oldTax = taxCalculation(income_temp, 'old', exemption_temp)
-        print(income_temp, exemption_temp, newTax, oldTax)
+        oldTax = taxCalculation(income_temp, 'old', (exemption_temp + standard_ded))
+        print(income_temp, (exemption_temp + standard_ded), newTax, oldTax)
         if(oldTax <= newTax):
             if income_temp not in income_exempt:
-                income_exempt[income_temp] = exemption_temp
+                income_exempt[income_temp] = (exemption_temp + standard_ded)
     income_temp += 100000
 
 print(income_exempt)
 for key, value in income_exempt.items():
     print(key, value)
-
-
-
