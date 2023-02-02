@@ -1,15 +1,14 @@
 import math
 oldRegimeIncomeTaxSlabs = [[0, 2.5], [5, 2.5], [20, 5], [30, math.inf]]
 newRegimeIncomeTaxSlabs = [[0, 3], [5, 3], [10, 3], [15, 3], [20, 3],[30,  math.inf]]
-standard_ded = 0 
-#Please add standard deduction
+standard_ded = 50000
 #nps = 0
 def taxCalculation(totalSalary, regime, totalExemption):
     if regime == 'old':
         regimeSlabs = oldRegimeIncomeTaxSlabs
     else:
         regimeSlabs = newRegimeIncomeTaxSlabs
-    taxableIncome = totalSalary - totalExemption
+    taxableIncome = totalSalary - totalExemption - standard_ded
     tax = 0
     index = 0
     taxableIncomeAux = taxableIncome
@@ -33,14 +32,14 @@ x = 0
 income_exempt = {}
 while income_temp < income_max:
     exemption_temp = 0
-    newTax = taxCalculation(income_temp, 'new', standard_ded)
+    newTax = taxCalculation(income_temp, 'new', 0)
     while exemption_temp < exemption_max and exemption_temp < income_temp:
         exemption_temp += 5000
-        oldTax = taxCalculation(income_temp, 'old', (exemption_temp + standard_ded))
-        print(income_temp, (exemption_temp + standard_ded), newTax, oldTax)
+        oldTax = taxCalculation(income_temp, 'old', (exemption_temp ))
+        print(income_temp, (exemption_temp), newTax, oldTax)
         if(oldTax <= newTax):
             if income_temp not in income_exempt:
-                income_exempt[income_temp] = (exemption_temp + standard_ded)
+                income_exempt[income_temp] = (exemption_temp)
     income_temp += 100000
 
 print(income_exempt)
