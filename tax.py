@@ -9,7 +9,6 @@ def taxCalculation(totalSalary, regime, totalExemption):
         regimeSlabs = oldRegimeIncomeTaxSlabs
     else:
         regimeSlabs = newRegimeIncomeTaxSlabs
-        totalExemption = 0
     taxableIncome = totalSalary - totalExemption
     tax = 0
     index = 0
