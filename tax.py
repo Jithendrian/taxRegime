@@ -1,7 +1,8 @@
 import math
 oldRegimeIncomeTaxSlabs = [[0, 2.5], [5, 2.5], [20, 5], [30, math.inf]]
 newRegimeIncomeTaxSlabs = [[0, 3], [5, 3], [10, 3], [15, 3], [20, 3],[30,  math.inf]]
-standard_ded = 50000
+standard_ded = 0 
+#Please add standard deduction
 #nps = 0
 def taxCalculation(totalSalary, regime, totalExemption):
     if regime == 'old':
